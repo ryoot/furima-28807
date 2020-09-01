@@ -37,8 +37,8 @@
 
 ### Association
 
-- belongs_to :users
-- belongs_to :orders
+- belongs_to :user
+- has_one :order
 
 ## comments テーブル
 
