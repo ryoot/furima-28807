@@ -12,14 +12,13 @@
 |first-name-kana | string  | null: false |
 |family-name-kana| string  | null: false |
 | gender         | string  | null: false |
-| birthday       | data    | null: false |
+| birthday       | date    | null: false |
 
 ### Association
 
 - has_many :comments
 - has_many :orders
 - has_many :items
-- has_one :address
 
 ## items テーブル
 
@@ -31,13 +30,15 @@
 | category_id      | integer    | null: false                    |
 | price            | integer    | null: false                    |
 | status           | integer    | null:false                     |
+| prefecture       | integer    | null: false                    |
 | shipping-date_id | integer    | null:false                     |
 | burden-shipping  | string     | null:false                     |
 
 
 ### Association
 
-- has_many :users
+- belongs_to :users
+- belongs_to :orders
 
 ## comments テーブル
 
