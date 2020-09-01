@@ -2,15 +2,16 @@
 
 ## users テーブル
 
-| Column       | Type    | Options     |
-| ------------ | ------  | ----------- |
-| name         | string  | null: false |
-| email        | string  | null: false |
-| password     | string  | null: false |
-|first-name    | string  | null: false |
-|family-name   | string  | null: false |
-|birthday-year | integer | null: false |
-|birthday-month| integer | null: false |
+| Column         | Type   | Options     |
+| -------------- | ------ | ----------- |
+| name           | string | null: false |
+| email          | string | null: false |
+| password       | string | null: false |
+|first-name      | string | null: false |
+|family-name     | string | null: false |
+|first-name-kana | string | null: false |
+|family-name-kana| string | null: false |
+| gender         | string | null: false |
 
 ### Association
 
@@ -18,16 +19,21 @@
 - has_many :orders
 - has_many :items
 - has_one :address
-- has_one :creditcards
 
 ## items テーブル
 
-| Column   | Type   | Options     |
-| -------- | ------ | ----------- |
-| name     | string | null: false |
-| image    | string | null: false |
-| text     | string | null: false |
-| category | string | null: false |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| name          | string     | null: false                    |
+| image         | string     | null: false                    |
+| text          | string     | null: false                    |
+| category      | string     | null: false                    |
+| brand         | references | null: false, foreign_key: true |
+| price         | integer    | null: false                    |
+| status        | integer    | null:false                     |
+| size          | string     | null:false                     |
+| shipping-date | string     | null:false                     |
+
 
 ### Association
 
@@ -50,40 +56,35 @@
 | Column  | Type       | Options                        |
 | ------- | ---------- | ------------------------------ |
 | name    | string     |                                |
-| user    | references | null: false, foreign_key: true |
-| brand   | references | null: false, foreign_key: true |
-| price   | integer    | null: false                    |
-| status  | integer    | null:false                     |
-| size    | string     | null:false                     |
+| user_id | references | null: false, foreign_key: true |
 
 ### Association
 
 - has_many:comments
 - belongs_to :user
 
-## credit_cards テーブル
-| Column       | Type      | Options     |
-| ------------ | ------    | ----------- |
-| user         | reference | null: false |
-| card_company | string    | null: false |
-| card_number  | string    | null: false |
-| card_year    | string    | null: false |
-| card_month   | string    | null: false |
-| card_password| integer   | null: false |
-| customer_id  | integer   | null: false |
+## deta テーブル
+| Column         | Type      | Options     |
+| -------------  | ------    | ----------- |
+| user           | reference | null: false |
+| birthday-year  | string    | null: false |
+| birthday-month | string    | null: false |
+| birthday-day   | string    | null: false |
 
 ### Association
 
 - belongs_to :user
 
 ## address テーブル
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| user         | references | null: false, foreign_key: true |
-| address      | string     | null: false                    |
-| building     | string     | null: false                    |
-| phone-number | integer    | null:false                     |
-| prefecture   | string     | null:false                     |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| user_id       | references | null: false, foreign_key: true |
+| address_id    | integer    | null: false                    |
+| building_id   | integer    | null: false                    |
+| phone-number  | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :user
+- belongs_to :order
+- belongs_to_active_hash :prefecture
