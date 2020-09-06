@@ -6,29 +6,24 @@ class Item < ApplicationRecord
   belongs_to_active_hash :prefecture
   belongs_to_active_hash :shipping_date
 
-  validates :title, :text, :category_id, presence: true
-  validates :category_id,  numericality: { other_than: 1 }
+  validates :text, :category_id, presence: true
+  validates :category_id,  numericality: { other_than: 0 }
 
-  validates :title, :text, :status, presence: true
-  validates :status_id,  numericality: { other_than: 1 }
+  validates :text, :status_id, presence: true
+  validates :status_id,  numericality: { other_than: 0 }
 
-  validates :title, :text, :burden_shipping, presence: true
-  validates :burden_shipping_id,  numericality: { other_than: 1 }
+  validates :text, :burden_shipping_id, presence: true
+  validates :burden_shipping_id,  numericality: { other_than: 0 }
 
-  validates :title, :text, :prefecture, presence: true
-  validates :prefecture_id,  numericality: { other_than: 1 }
+  validates :text, :prefecture_id, presence: true
+  validates :prefecture_id,  numericality: { other_than: 0 }
 
-  validates :title, :text, :shipping_date, presence: true
-  validates :shipping_date_id,  numericality: { other_than: 1 }
+  validates :text, :shipping_date_id, presence: true
+  validates :shipping_date_id,  numericality: { other_than: 0 }
 
 
 
   belongs_to :user
   has_one_attached :image
 
-  validates :content, presence: true, unless: :was_attached?
-
-  def was_attached?
-    self.image.attached?
-  end
 end

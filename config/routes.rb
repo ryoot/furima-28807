@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   # root to: 'articles#index' 
 
   resources :users,only: [:edit,:update]
-  resources :items,only: [:index,:new,:edit,:show]
+  resources :items,only: [:index,:new,:edit,:show,:create]
   resources :articles
 end
