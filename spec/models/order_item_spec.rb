@@ -37,6 +37,10 @@ RSpec.describe OrderItems, type: :model do
       @order.valid?
       expect(@order.errors.full_messages).to include("Address can't be blank")
     end
+    it "buildingは空でも保存できること" do
+      @order.building = nil
+      expect(@order).to be_valid
+    end
     it "phone_numberが空ならNG" do
       @order.phone_number = ""
       @order.valid?
