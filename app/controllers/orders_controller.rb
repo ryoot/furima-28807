@@ -1,10 +1,14 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:index,:create]
+  before_action :move_index, only: [:create]
   def index
-    @order = OrderItems.new
     unless user_signed_in?
       redirect_to user_session_path
     end
+    if @item.user_id == current_user.id
+      redirect_to root_path
+    end
+    @order = OrderItems.new
   end
   
   def create
@@ -28,6 +32,12 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
+  def move_index
+    @order = @item.order
+      if @order
+        redirect_to root_path
+      end
+  end
 
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
