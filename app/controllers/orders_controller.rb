@@ -2,6 +2,9 @@ class OrdersController < ApplicationController
   before_action :set_order, only: [:index,:create]
   def index
     @order = OrderItems.new
+    unless user_signed_in?
+      redirect_to user_session_path
+    end
   end
   
   def create
@@ -25,7 +28,7 @@ class OrdersController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  
+
   def pay_item
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
